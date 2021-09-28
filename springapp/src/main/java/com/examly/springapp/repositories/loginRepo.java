@@ -10,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional;
 import com.examly.springapp.models.login;
 
 public interface loginRepo extends CrudRepository<login, String>  {
-    
+    public login deleteByEmail(String email);
 }
