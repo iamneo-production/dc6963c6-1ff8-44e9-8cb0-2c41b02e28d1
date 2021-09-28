@@ -14,9 +14,9 @@ public class user {
 	@Column(name="mobile_number")
 	private String mobileNumber;
 	@Column(name="active")
-	private boolean active;
+	private boolean active=false;
 	@Column(name="role")
-	private String role;
+	private String role="user";
 	
 	
 	public user(String email, String password, String username, String mobileNumber, boolean active, String role) {
