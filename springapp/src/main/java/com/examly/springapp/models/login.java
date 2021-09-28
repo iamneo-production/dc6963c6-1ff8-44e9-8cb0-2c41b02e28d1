@@ -1,5 +1,10 @@
 package com.examly.springapp.models;
+import java.lang.annotation.Inherited;
+
+import javax.persistence.*;
+@Entity
 public class login {
+	@Id
     private String email;
 	private String password;
 	
