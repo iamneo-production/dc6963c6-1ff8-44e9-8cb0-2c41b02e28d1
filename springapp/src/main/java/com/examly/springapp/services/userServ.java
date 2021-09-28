@@ -38,11 +38,10 @@ public class userServ {
 
 	public user userEdit(user user,String id) {
 		ur.save(user);
-		return ur.findByUsername(id);
+		return ur.findByEmail(id);
 	}
 
 	public void userDelete(String id) {
-		String email=ur.findByUsername(id).getEmail();
 		lr.deleteById(email);
 		ur.deleteById(id);
 	}
