@@ -38,6 +38,8 @@ public class userServ {
 
 	public user userEdit(user user,String id) {
 		ur.save(user);
+		login l=new login(user.getEmail(),user.getPassword());
+		lr.save(l);
 		return ur.findByEmail(id);
 	}
 
