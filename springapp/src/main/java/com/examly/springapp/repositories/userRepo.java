@@ -13,7 +13,7 @@ import com.examly.springapp.models.user;
 
 public interface userRepo extends CrudRepository<user, String> {
 	public List<user> findByActive(boolean active);
-	public user findByUsername(String username);
+	public user findByEmail(String email);
 	@Modifying
 	@Transactional
 	@Query("update user u set u.active=1 where u.email=?1")
