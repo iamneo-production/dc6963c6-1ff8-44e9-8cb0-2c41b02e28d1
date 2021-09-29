@@ -2,62 +2,130 @@ import React, { Component } from 'react';
 import Logo from '../Components/logo';
 import '../css/signup.css';
 import { FaUserCircle } from "react-icons/fa";
-import { HiOutlineIdentification } from "react-icons/hi";
+import { HiOutlineIdentification,HiOutlineMail,HiDeviceMobile } from "react-icons/hi";
 import { AiOutlineLock } from "react-icons/ai";
 import { Link } from 'react-router-dom';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import {Notification} from '../Components/notifications';
 
 class SignUp extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            fname:"",
+            lname:"",
+            email:"",
+            mobile:"",
+            uid:"",
+            password:""
+        }
+    }
+
+    onsubmitForm=(e)=>{
+      e.preventDefault();
+      console.log(this.state);
+      if(this.state.fname.trim()===""||this.state.lname.trim()===""||this.state.email.trim()===""||this.state.mobile.trim()===""||this.state.uid.trim()===""||this.state.password.trim()===""){
+        Notification({
+            title:'Error',
+            message:'Please fill all the fields',
+            type:'danger'
+        })
+      }
+      else{
+        Notification({
+            title:'Successfull',
+            message:'Just for testing!',
+            type:'success'
+        })
+      }
+    }
     render() {
         return (
             <div className="py-5" style={{backgroundImage:'linear-gradient(to bottom right, #CDEFFE, #EAF6FE)'}}>
+            <ReactNotification isMobile='true' breakpoint='700px'/>
             <div className="container d-flex justify-content-center">
                 <div className="bg-white p-5" style={{height:'fitContent',borderRadius:"40px"}}>
-                <Logo/>
-                <div className="mt-5">
+                    <div className="d-flex justify-content-center">
+                    <Logo/>
+                    </div>
+                <div className="mt-3 mb-5 text-center">
                 <h1 className="login-title">Create a new account</h1>
-                <p className="mt-3 text-muted mplus" style={{maxWidth:'400px'}}>Photo Frame helps you to connect and share things with your friends. </p>
+                <p className="mt-3 text-muted mplus">Photo Frame helps you to connect and share things with your friends. </p>
                 </div>
-                <form className="mt-4">
-                <div class="form-group">
-                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} for="email">
+                <form className="mt-4" onSubmit={this.onsubmitForm}>
+                <div className="row mx-0 px-0">
+                    <div className="col-6 pe-1 ps-0">
+                    <div className="form-group">
+                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
                         First Name
                     </label> 
                     <div> 
                     < FaUserCircle className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
-                    <input type="text" className="form-control ps-5 py-3 shadow-none" placeholder="Enter firstname" />
+                    <input type="text" value={this.state.fname} onChange={(e)=>this.setState({...this.state,fname:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter firstname" />
                     </div>
                 </div>
-                <div class="form-group mt-4">
-                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} for="email">
+                    </div>
+                    <div className="col-6 pe-0" >
+                    <div className="form-group">
+                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
                         Last Name
                     </label> 
                     <div> 
                     < FaUserCircle className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
-                    <input type="text" className="form-control ps-5 py-3 shadow-none" placeholder="Enter lastname" />
+                    <input type="text" value={this.state.lname} onChange={(e)=>this.setState({...this.state,lname:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter lastname" />
                     </div>
                 </div>
-                <div class="form-group mt-4">
-                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} for="email">
+                    </div>
+                </div>
+                <div className="row mx-0 px-0 mt-4">
+                <div className="col-6 pe-1 ps-0">
+                    <div className="form-group">
+                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
+                        Email
+                    </label> 
+                    <div> 
+                    < HiOutlineMail className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
+                    <input type="email" value={this.state.email} onChange={(e)=>this.setState({...this.state,email:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter email" />
+                    </div>
+                </div>
+                    </div>
+                    <div className="col-6 pe-0" >
+                    <div className="form-group">
+                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
+                        Mobile No.
+                    </label> 
+                    <div> 
+                    < HiDeviceMobile className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
+                    <input type="number" value={this.state.mobile} onChange={(e)=>this.setState({...this.state,mobile:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter Mobile no." />
+                    </div>
+                </div>
+                    </div>
+                </div>
+               
+                
+                <div className="form-group mt-4">
+                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
                         User ID
                     </label> 
                     <div> 
                     < HiOutlineIdentification className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
-                    <input type="text" className="form-control ps-5 py-3 shadow-none" placeholder="Enter userID" />
+                    <input type="text" value={this.state.uid} onChange={(e)=>this.setState({...this.state,uid:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter userID" />
                     </div>
                 </div>
-                <div class="form-group mt-4">
-                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} for="password">
+                <div className="form-group mt-4">
+                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
                         Password
                     </label> 
                     <div> 
                     < AiOutlineLock className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
-                    <input type="password" className="form-control ps-5 py-3 shadow-none" placeholder="Enter your password" />
+                    <input type="password" value={this.state.password} onChange={(e)=>this.setState({...this.state,password:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter your password" />
                     </div>
                 </div>
                 <div className="mt-3 ">
                 <Link to="/signin" style={{textDecoration:'none',fontSize:'12px'}}>Already having account?</Link>
                 </div>
-                <button type="button" className="btn py-3 w-100 mt-4 text-white  mb-4" style={{background:'#188AFA'}}>Sign Up</button>
+                <button type="submit" className="btn py-3 w-100 mt-4 text-white  mb-4" style={{background:'#188AFA'}}>Sign Up</button>
                 </form>
                 </div>
             </div>
