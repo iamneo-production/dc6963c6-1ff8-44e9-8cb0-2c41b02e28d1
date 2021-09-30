@@ -4,9 +4,9 @@ import javax.persistence.*;
 @Entity
 public class user {
 	
-	@Id
 	@Column(name="username")
 	private String username;
+	@Id
 	@Column(name="email")
 	private String email;
 	@Column(name="password")
