@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router,Switch,Route,Redirect} from 'react-router-dom';
+import isAuthenticated from './Helper/isAuthenticated';
+import Home from './Pages/Home';
+import SignIn from './Pages/SignIn';
+import SignUp from './Pages/SignUp';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <h1>Shubham App</h1>
-    </div>
+    <Router>
+          <Switch>
+                <Route
+                      exact
+                      path="/"
+                      render={() => {
+                          return (
+                            !isAuthenticated() ?
+                            <Redirect to="/home" /> :
+                            <Redirect to="/signin" /> 
+                          )
+                      }}
+                    />
+            <Route path="/home" exact component={Home}></Route>
+            <Route path="/signup" exact component={SignUp}></Route>
+            <Route path="/signin" exact component={SignIn}></Route>
+          </Switch>
+        </Router>
   );
 }
 
