@@ -1,8 +1,8 @@
 package com.examly.springapp.controllers;
-
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.models.user;
+import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.userServ;
 
 @RestController
@@ -17,10 +18,11 @@ public class UserController {
 	
 	@Autowired
 	public userServ us;
-	
+	@Autowired
+	public userRepo ur;
 	@RequestMapping("/hello")
-	public String hello(){
-		return "HELLO!!";
+	public user hello(Authentication authentication){
+		return ur.findByEmail(authentication.getName());
 	}
 	
 	@RequestMapping("/admin")
