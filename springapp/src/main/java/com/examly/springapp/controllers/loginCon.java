@@ -15,12 +15,15 @@ import com.examly.springapp.models.AuthenticationResponse;
 import com.examly.springapp.models.JwtUtil;
 import com.examly.springapp.models.login;
 import com.examly.springapp.models.user;
+import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.loginServ;
 @RestController
 public class loginCon {
 	public login login;
 	@Autowired
 	public loginServ ls;
+	@Autowired
+	public userRepo ur;
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
@@ -49,7 +52,8 @@ public class loginCon {
 		h.put("jwt", jwt);
 		h.put("Status", "true");
 		h.put("Message", "Logged in successfully");
-		//h.put("username",user.getUsername());
+		String username=ur.findById(user.getEmail()).get().getUsername();
+		h.put("username",username);
 		h.put("email",user.getEmail());
 		return ResponseEntity.ok(h);
 	}
