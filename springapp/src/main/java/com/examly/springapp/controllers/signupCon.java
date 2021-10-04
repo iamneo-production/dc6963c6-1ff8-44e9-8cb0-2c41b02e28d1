@@ -12,6 +12,7 @@ import com.examly.springapp.repositories.loginRepo;
 import com.examly.springapp.repositories.userRepo;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class signupCon {
 	public user user;
 	@Autowired
