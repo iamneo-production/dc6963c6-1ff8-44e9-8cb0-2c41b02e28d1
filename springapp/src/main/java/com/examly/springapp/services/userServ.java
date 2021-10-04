@@ -44,7 +44,7 @@ public class userServ {
 	}
 
 	public void userDelete(String id) {
-		lr.deleteById(email);
+		lr.deleteById(id);
 		ur.deleteById(id);
 	}
 }
