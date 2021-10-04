@@ -1,5 +1,7 @@
 package com.examly.springapp.controllers;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,14 +29,16 @@ public class loginCon {
 	private JwtUtil jwtTokenUtil;
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody user user) throws Exception {
-
+		HashMap <String, String> h=new HashMap<>();
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
 			);
 		}
 		catch (BadCredentialsException e) {
-			throw new Exception("Incorrect username or password", e);
+			h.put("Status", "false");
+			h.put("Message", "Invalid credentials");
+			return ResponseEntity.ok(h);
 		}
 
 
@@ -42,8 +46,12 @@ public class loginCon {
 				.loadUserByUsername(user.getEmail());
 
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
-
-		return ResponseEntity.ok(new AuthenticationResponse(jwt));
+		h.put("jwt", jwt);
+		h.put("Status", "true");
+		h.put("Message", "Logged in successfully");
+		//h.put("username",user.getUsername());
+		h.put("email",user.getEmail());
+		return ResponseEntity.ok(h);
 	}
 
 }
