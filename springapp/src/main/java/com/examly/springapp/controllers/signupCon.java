@@ -10,7 +10,6 @@ import com.examly.springapp.models.login;
 import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.loginRepo;
 import com.examly.springapp.repositories.userRepo;
-import com.examly.springapp.services.signupServ;
 
 @RestController
 public class signupCon {
