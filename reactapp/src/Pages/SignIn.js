@@ -96,7 +96,7 @@ class SignIn extends Component {
                 <form className="mt-4" onSubmit={this.onSubmitForm}>
                 <div className="form-group">
                     <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}}>
-                        Username
+                        Email
                     </label> 
                     <div> 
                     < FaUserCircle className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
