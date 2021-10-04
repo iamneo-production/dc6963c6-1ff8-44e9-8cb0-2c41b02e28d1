@@ -18,6 +18,7 @@ import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.loginServ;
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class loginCon {
 	public login login;
 	@Autowired
