@@ -1,10 +1,13 @@
 package com.examly.springapp.models;
 
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class user {
 	@Id
+	@GeneratedValue(generator="uuid")
+	@GenericGenerator(name="uuid", strategy="uuid2")
 	@Column(name="id")
 	private String id;
 	@Column(name="username")
