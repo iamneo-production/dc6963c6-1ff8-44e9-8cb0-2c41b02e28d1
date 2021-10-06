@@ -16,13 +16,11 @@ import com.examly.springapp.models.JwtUtil;
 import com.examly.springapp.models.login;
 import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.userRepo;
-import com.examly.springapp.services.loginServ;
+
 @RestController
 @CrossOrigin(origins="*", allowedHeaders="*")
 public class loginCon {
 	public login login;
-	@Autowired
-	public loginServ ls;
 	@Autowired
 	public userRepo ur;
 	@Autowired
