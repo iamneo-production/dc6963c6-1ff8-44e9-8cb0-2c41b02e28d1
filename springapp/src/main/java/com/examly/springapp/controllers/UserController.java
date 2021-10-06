@@ -2,6 +2,7 @@ package com.examly.springapp.controllers;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class UserController {
 	public userRepo ur;
 	@RequestMapping("/hello")
 	public user hello(Authentication authentication){
-		return ur.findByEmail(authentication.getName());
+		return ur.findByEmail(authentication.getName()).get();
 	}
 	
 	@RequestMapping("/admin")
@@ -39,8 +40,8 @@ public class UserController {
 		return us.userEdit(user,id);
 	}
 	@RequestMapping(method=RequestMethod.POST, value="/admin/addUser")
-	void userEditSave(@RequestBody user user){
-		us.userEditSave(user);
+	ResponseEntity<?> userEditSave(@RequestBody user user){
+		return us.userEditSave(user);
 	}
 	@RequestMapping(method=RequestMethod.DELETE, value="/admin/delete/{id}")
 	void userDelete(@PathVariable String id) {
