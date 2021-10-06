@@ -51,6 +51,9 @@ class SignIn extends Component {
                 const cookies = new Cookies();
                 if(res.data.Status==="true"){
                     cookies.set('tkn', res.data.jwt, { path: '/' });
+                    cookies.set('id', res.data.id, { path: '/' });
+                    cookies.set('username', res.data.username, { path: '/' });
+                    cookies.set('email', res.data.email, { path: '/' });
                     Notification({
                     title:'Successfull',
                     message:res.data.Message,
