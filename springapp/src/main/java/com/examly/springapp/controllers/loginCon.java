@@ -18,7 +18,7 @@ import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.loginServ;
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins="*", allowedHeaders="*")
 public class loginCon {
 	public login login;
 	@Autowired
@@ -53,9 +53,11 @@ public class loginCon {
 		h.put("jwt", jwt);
 		h.put("Status", "true");
 		h.put("Message", "Logged in successfully");
-		String username=ur.findById(user.getEmail()).get().getUsername();
+		String username=ur.findByEmail(user.getEmail()).get().getUsername();
 		h.put("username",username);
 		h.put("email",user.getEmail());
+		String id=ur.findByEmail(user.getEmail()).get().getId();
+		h.put("id",id);
 		return ResponseEntity.ok(h);
 	}
 

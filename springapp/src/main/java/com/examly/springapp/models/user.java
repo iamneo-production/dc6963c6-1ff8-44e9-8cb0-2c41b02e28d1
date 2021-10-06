@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 @Entity
 public class user {
-	
+	@Id
+	@Column(name="id")
+	private String id;
 	@Column(name="username")
 	private String username;
-	@Id
 	@Column(name="email")
 	private String email;
 	@Column(name="password")
@@ -20,7 +21,7 @@ public class user {
 	private String role="ROLE_USER";
 	
 	
-	public user(String email, String password, String username, String mobileNumber, boolean active, String role) {
+	public user(String id, String email, String password, String username, String mobileNumber, boolean active, String role) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -28,10 +29,16 @@ public class user {
 		this.mobileNumber = mobileNumber;
 		this.active = active;
 		this.role = role;
-		//this.id=id;
+		this.id=id;
 	}
 	public user() {
 		
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getEmail() {
 		return email;
