@@ -1,0 +1,15 @@
+.react-tabs__tab{
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    width: 50% !important;
+    background: darkgray;
+    font-weight: 500;
+
+}
+.react-tabs__tab--selected {
+    background: #162D59 !important;
+}
+.react-tabs__tab-list{
+border-bottom: 0px !important;
+}
