@@ -6,6 +6,7 @@ import SignUp from './Pages/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Profile from './Pages/profile';
 
+
 function App() {
   return (
     <Router>
