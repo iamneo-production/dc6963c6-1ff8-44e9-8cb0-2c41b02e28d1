@@ -2,46 +2,102 @@ import React, { Component } from 'react';
 import Logo from '../Components/logo';
 import '../css/signup.css';
 import { FaUserCircle } from "react-icons/fa";
-import { HiOutlineIdentification,HiOutlineMail,HiDeviceMobile } from "react-icons/hi";
+import {HiOutlineMail,HiDeviceMobile } from "react-icons/hi";
 import { AiOutlineLock } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import {Notification} from '../Components/notifications';
+import axios from 'axios';
+import Loader from '../Components/loader';
 
 class SignUp extends Component {
     constructor(props){
         super(props);
         this.state={
+            loading:false,
             fname:"",
             lname:"",
             email:"",
             mobile:"",
-            uid:"",
             password:""
         }
     }
 
     onsubmitForm=(e)=>{
       e.preventDefault();
-      console.log(this.state);
-      if(this.state.fname.trim()===""||this.state.lname.trim()===""||this.state.email.trim()===""||this.state.mobile.trim()===""||this.state.uid.trim()===""||this.state.password.trim()===""){
+      if(this.state.fname.trim()===""||this.state.lname.trim()===""||this.state.email.trim()===""||this.state.mobile.trim()===""||this.state.password.trim()===""){
         Notification({
             title:'Error',
             message:'Please fill all the fields',
             type:'danger'
         })
       }
-      else{
+      else if(this.state.password.length<=5){
         Notification({
-            title:'Successfull',
-            message:'Just for testing!',
-            type:'success'
+            title:'Error',
+            message:'Password length should be greater than 6!',
+            type:'danger'
         })
+      }
+      else if(this.state.mobile.length!==10){
+        Notification({
+            title:'Error',
+            message:'Invalid Mobile Number',
+            type:'danger'
+        })
+      }
+      else{ 
+        this.setState({...this.state,loading:true});
+        axios({
+            method:'POST',
+            url:'https://8080-aaaabbfaadfcfeaadebaabbeabfac.examlyiopb.examly.io/signup',
+            headers:{
+                'content-type':'application/json',
+                'accept':'application/json',
+                'Access-Control-Allow-Origin': '*',
+              },
+            data:{
+                "username":this.state.fname+" "+this.state.lname,
+                "email":this.state.email,
+                "mobileNum":this.state.mobile,
+                "password":this.state.password
+
+            }
+        })
+        .then(res=>{
+            this.setState({...this.state,loading:false});
+            res.data.Status==="true"?
+            Notification({
+                title:'Successfull',
+                message:res.data.Message,
+                type:'success'
+            }):
+            Notification({
+                title:'Error',
+                message:res.data.Message,
+                type:'danger'
+            })
+        })
+        .catch(err=>
+            {
+            this.setState({...this.state,loading:false});
+                Notification({
+                title:'Error',
+                message:"Failed to Sign Up!",
+                type:'danger'
+            })});
       }
     }
     render() {
         return (
+            <>
+            {
+            this.state.loading===true&&
+            <Loader/>
+            }
+            {
+            this.state.loading===false&&
             <div className="py-5" style={{backgroundImage:'linear-gradient(to bottom right, #CDEFFE, #EAF6FE)'}}>
             <ReactNotification isMobile='true' breakpoint='700px'/>
             <div className="container d-flex justify-content-center">
@@ -102,17 +158,6 @@ class SignUp extends Component {
                 </div>
                     </div>
                 </div>
-               
-                
-                <div className="form-group mt-4">
-                    <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
-                        User ID
-                    </label> 
-                    <div> 
-                    < HiOutlineIdentification className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
-                    <input type="text" value={this.state.uid} onChange={(e)=>this.setState({...this.state,uid:e.target.value})} className="form-control ps-5 py-3 shadow-none" placeholder="Enter userID" />
-                    </div>
-                </div>
                 <div className="form-group mt-4">
                     <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}} >
                         Password
@@ -130,6 +175,9 @@ class SignUp extends Component {
                 </div>
             </div>
             </div>
+            }
+            
+            </>
         );
     }
 }

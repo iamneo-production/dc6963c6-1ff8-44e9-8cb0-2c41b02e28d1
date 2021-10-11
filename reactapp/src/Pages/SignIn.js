@@ -7,19 +7,24 @@ import { Link } from 'react-router-dom';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import {Notification} from '../Components/notifications';
+import axios from 'axios';
+import Cookies from 'universal-cookie';
+import Loader from '../Components/loader';
+
 
 
 class SignIn extends Component {
     constructor(props){
         super(props);
         this.state={
-            username:"",
+            loading:false,
+            email:"",
             password:""
         }
     }
      onSubmitForm=(e)=>{
          e.preventDefault();
-         if(this.state.username.trim()===""||this.state.password.trim()===""){
+         if(this.state.email.trim()===""||this.state.password.trim()===""){
             Notification({
                 title:'Error',
                 message:'Please fill all the fields',
@@ -27,17 +32,62 @@ class SignIn extends Component {
             })
           }
           else{
-            Notification({
-                title:'Successfull',
-                message:'Just for testing!',
-                type:'success'
+              this.setState({...this.state,loading:true});
+            axios({
+                method:'POST',
+                url:'https://8080-aaaabbfaadfcfeaadebaabbeabfac.examlyiopb.examly.io/login',
+                headers:{
+                    'content-type':'application/json',
+                    'accept':'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                  },
+                data:{
+                    "email":this.state.email,
+                    "password":this.state.password
+                }
             })
+            .then(res=>{
+                this.setState({...this.state,loading:false});
+                const cookies = new Cookies();
+                if(res.data.Status==="true"){
+                    cookies.set('tkn', res.data.jwt, { path: '/' });
+                    cookies.set('id', res.data.id, { path: '/' });
+                    cookies.set('username', res.data.username, { path: '/' });
+                    cookies.set('email', res.data.email, { path: '/' });
+                    Notification({
+                    title:'Successfull',
+                    message:res.data.Message,
+                    type:'success'
+                })
+                }
+               else{
+                Notification({
+                    title:'Error',
+                    message:res.data.Message,
+                    type:'danger'
+                })
+               }
+            })
+            .catch(err=> {
+                this.setState({...this.state,loading:false});
+                Notification({
+                title:'Error',
+                message:"Failed To Sign In!",
+                type:'danger'
+            })});
           }
      }
 
     render() {
         return (
-            <div className="py-5" style={{backgroundImage:'linear-gradient(to bottom right, #CDEFFE, #EAF6FE)'}}>
+            <>
+            {
+                this.state.loading===true&&
+                <Loader/>
+            }
+            {
+                this.state.loading===false&&
+                <div className="py-5" style={{backgroundImage:'linear-gradient(to bottom right, #CDEFFE, #EAF6FE)'}}>
             <ReactNotification isMobile='true' breakpoint='700px'/>
             <div className="container d-flex justify-content-center align-items-center" style={{height:'100vh'}}>
                 <div className="bg-white p-5" style={{height:'fitContent',borderRadius:"40px"}}>
@@ -49,11 +99,11 @@ class SignIn extends Component {
                 <form className="mt-4" onSubmit={this.onSubmitForm}>
                 <div className="form-group">
                     <label className="control-label mplus text-muted mb-2" style={{fontSize:'13px'}}>
-                        Username
+                        Email
                     </label> 
                     <div> 
                     < FaUserCircle className="position-absolute mt-3 ms-3 text-muted" style={{fontSize:'26px'}}/> 
-                    <input type="text" value={this.state.username} onChange={(e)=>this.setState({...this.state,username:e.target.value})} className="form-control ps-5 py-3 shadow-none" name="username" placeholder="Enter Username" />
+                    <input type="email" value={this.state.email} onChange={(e)=>this.setState({...this.state,email:e.target.value})} className="form-control ps-5 py-3 shadow-none" name="username" placeholder="Enter Email" />
                     </div>
                 </div>
                 <div className="form-group mt-4">
@@ -74,6 +124,8 @@ class SignIn extends Component {
                 </div>
             </div>
             </div>
+            }
+            </>
         );
     }
 }

@@ -1,12 +1,17 @@
 package com.examly.springapp.models;
+
 import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class user {
-	
+	@Id
+	@GeneratedValue(generator="uuid")
+	@GenericGenerator(name="uuid", strategy="uuid2")
+	@Column(name="id")
+	private String id;
 	@Column(name="username")
 	private String username;
-	@Id
 	@Column(name="email")
 	private String email;
 	@Column(name="password")
@@ -14,12 +19,12 @@ public class user {
 	@Column(name="mobile_number")
 	private String mobileNumber;
 	@Column(name="active")
-	private boolean active=false;
+	private boolean active=true;
 	@Column(name="role")
-	private String role="user";
+	private String role="ROLE_USER";
 	
 	
-	public user(String email, String password, String username, String mobileNumber, boolean active, String role) {
+	public user(String id, String email, String password, String username, String mobileNumber, boolean active, String role) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -27,10 +32,16 @@ public class user {
 		this.mobileNumber = mobileNumber;
 		this.active = active;
 		this.role = role;
-		//this.id=id;
+		this.id=id;
 	}
 	public user() {
 		
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getEmail() {
 		return email;
