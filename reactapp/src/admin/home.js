@@ -1,34 +1,51 @@
 import React, { Component } from 'react';
 import Logo from '../Components/logo';
 import {FaUserEdit} from 'react-icons/fa'
-import {HiUserRemove} from 'react-icons/hi'
+import {HiUserRemove} from 'react-icons/hi';
+import ModalComponent from './components/modal';
 
 class AdminHome extends Component{
     
+    constructor(props){
+        super(props);
+        this.state={
+            showModal:false,
+            selectedUser:{}
+        }
+    }
+
+    SetModal=(user)=>{
+        this.setState({...this.state,showModal:!this.state.showModal,selectedUser:user})
+    }
     
     render(){
         const users=[
             {
                 'username':'admin1',
                 'email':'admin1@mail.com',
+                'mobile':4645656767,
             },
             {
                 'username':'admin2',
                 'email':'admin2@mail.com',
+                'mobile':4645656767,
             },
             {
                 'username':'admin3',
                 'email':'admin3@mail.com',
+                'mobile':4645656767,
             },
             {
                 'username':'admin4',
                 'email':'admin4@mail.com',
+                'mobile':4645656767,
             },
         ]
 
         return(
             
             <>
+            <ModalComponent Data={this.state.selectedUser} heading="Edit User" showModal={this.state.showModal} setModal={this.SetModal}/>
             <div className='container-fluid mt-4'> 
             <div className='d-flex row'>
                 <div className='col-3'> 
@@ -59,8 +76,8 @@ class AdminHome extends Component{
                             <tr>
                             <th scope="row">{user.username}</th>
                             <td>{user.email}</td>
-                            <td><FaUserEdit/></td>
-                            <td><HiUserRemove/></td>
+                            <td><FaUserEdit onClick={()=>this.SetModal(user)} style={{cursor:'pointer'}}/></td>
+                            <td><HiUserRemove style={{cursor:'pointer'}}/></td>
                             </tr>
                             )
                     }
