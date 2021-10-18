@@ -35,7 +35,7 @@ public class UserController {
 		return us.getOnlineUser();
 	}
 	@RequestMapping(method=RequestMethod.PUT, value="/admin/userEdit/{id}")
-	user userEdit(@RequestBody user user, @PathVariable String id) {
+	ResponseEntity<?> userEdit(@RequestBody user user, @PathVariable String id) {
 		//userEditSave(us.userEdit(id));
 		return us.userEdit(user,id);
 	}

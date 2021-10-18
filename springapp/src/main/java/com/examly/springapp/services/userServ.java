@@ -45,11 +45,14 @@ public class userServ {
 		return ResponseEntity.ok(h);
 	}
 
-	public user userEdit(user user,String id) {
+	public ResponseEntity<?> userEdit(user user,String id) {
 		ur.save(user);
 		login l=new login(user.getEmail(),user.getPassword());
 		lr.save(l);
-		return ur.findById(id).get();
+		HashMap<String, String> h=new HashMap<>();
+		h.put("Status", "true");
+		h.put("Message", "User added successfully");
+		return ResponseEntity.ok(h);
 	}
 
 	public ResponseEntity<?> userDelete(String id) {
