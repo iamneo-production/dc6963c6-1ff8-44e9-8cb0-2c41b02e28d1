@@ -44,8 +44,8 @@ public class UserController {
 		return us.userEditSave(user);
 	}
 	@RequestMapping(method=RequestMethod.DELETE, value="/admin/delete/{id}")
-	void userDelete(@PathVariable String id) {
+	ResponseEntity<?> userDelete(@PathVariable String id) {
 		//userEditSave(us.userEdit(id));
-		us.userDelete(id);
+		return us.userDelete(id);
 	}
 }

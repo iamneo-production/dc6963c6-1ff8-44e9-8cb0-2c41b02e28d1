@@ -52,8 +52,12 @@ public class userServ {
 		return ur.findById(id).get();
 	}
 
-	public void userDelete(String id) {
+	public ResponseEntity<?> userDelete(String id) {
 		lr.deleteById(ur.findById(id).get().getEmail());
 		ur.deleteById(id);
+		HashMap<String, String> h=new HashMap<>();
+		h.put("Status", "true");
+		h.put("Message", "User deleted successfully");
+		return ResponseEntity.ok(h);
 	}
 }
