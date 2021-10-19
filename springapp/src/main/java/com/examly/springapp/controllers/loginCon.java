@@ -55,7 +55,9 @@ public class loginCon {
 		h.put("username",username);
 		h.put("email",user.getEmail());
 		String id=ur.findByEmail(user.getEmail()).get().getId();
+		String r=ur.findByEmail(user.getEmail()).get().getRole();
 		h.put("id",id);
+		h.put("role",r);
 		return ResponseEntity.ok(h);
 	}
 
