@@ -18,4 +18,7 @@ public interface userRepo extends CrudRepository<user, String> {
 	@Transactional
 	@Query("update user u set u.active=1 where u.email=?1")
 	void setActiveForUser(String email);
+
+
+	List<user> findByusernameIgnoreCaseContaining(String user);
 }

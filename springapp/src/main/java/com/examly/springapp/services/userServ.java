@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.*;
-
 import com.examly.springapp.models.login;
 import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.loginRepo;
@@ -62,5 +61,26 @@ public class userServ {
 		h.put("Status", "true");
 		h.put("Message", "User deleted successfully");
 		return ResponseEntity.ok(h);
+	}
+
+
+
+
+
+
+//	---------------------------------------------------
+	public user getUser(String id) {
+		return ur.findById(id).orElse(null);
+	}
+	
+	public List<String> getFriends(String id) {
+		return ur.findById(id).orElse(null).getFriends();
+	}
+	
+	public List<user> getSearchedList(String username) {
+		
+		
+		
+		return ur.findByusernameIgnoreCaseContaining(username);
 	}
 }

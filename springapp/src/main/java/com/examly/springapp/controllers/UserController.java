@@ -48,4 +48,5 @@ public class UserController {
 		//userEditSave(us.userEdit(id));
 		return us.userDelete(id);
 	}
+
 }
