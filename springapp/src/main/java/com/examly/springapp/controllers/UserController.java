@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.userServ;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class UserController {
 	
@@ -26,7 +28,7 @@ public class UserController {
 		return ur.findByEmail(authentication.getName()).get();
 	}
 	
-	@RequestMapping("/admin")
+	@RequestMapping(value="/admin", method = RequestMethod.GET)
 	public List<user> getUser(){
 		return us.getUser();
 	}

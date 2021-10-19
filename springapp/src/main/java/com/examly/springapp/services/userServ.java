@@ -56,7 +56,7 @@ public class userServ {
 	}
 
 	public ResponseEntity<?> userDelete(String id) {
-		lr.deleteById(ur.findById(id).get().getEmail());
+		//lr.deleteById(ur.findById(id).get().getEmail());
 		ur.deleteById(id);
 		HashMap<String, String> h=new HashMap<>();
 		h.put("Status", "true");
