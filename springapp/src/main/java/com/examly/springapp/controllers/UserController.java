@@ -15,8 +15,8 @@ import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.userServ;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 	
 	@Autowired
