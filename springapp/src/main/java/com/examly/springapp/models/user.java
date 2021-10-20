@@ -1,6 +1,7 @@
 package com.examly.springapp.models;
 
 import javax.persistence.*;
+import java.util.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -22,6 +23,18 @@ public class user {
 	private boolean active=true;
 	@Column(name="role")
 	private String role="ROLE_USER";
+	@OneToMany(mappedBy = "userId")
+	private List<Comment> comment;
+	@OneToMany(mappedBy = "userId")
+	private List<Image> image;
+	@ElementCollection
+	@CollectionTable(name = "Friends", joinColumns = @JoinColumn(name = "id"))
+	@Column(name = "friends")
+	private List<String> friends;
+
+	@OneToMany(mappedBy = "userId")
+	private List<Likes> likes;
+	
 	
 	
 	public user(String id, String email, String password, String username, String mobileNumber, boolean active, String role) {
@@ -80,6 +93,36 @@ public class user {
 		this.role = role;
 	}
 
+	// public List<Likes> getLikes() {
+	// 	return likes;
+	// }
+
+	// public void setLikes(List<Likes> likes) {
+	// 	this.likes = likes;
+	// }
+	public List<String> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<String> friends) {
+		this.friends = friends;
+	}
+
+	// public List<Comment> getComment() {
+	// 	return comment;
+	// }
+
+	// public void setComment(List<Comment> comment) {
+	// 	this.comment = comment;
+	// }
+
+	// public List<Image> getImage() {
+	// 	return image;
+	// }
+
+	// public void setImage(List<Image> image) {
+	// 	this.image = image;
+	// }
 	//Test
 	
 	

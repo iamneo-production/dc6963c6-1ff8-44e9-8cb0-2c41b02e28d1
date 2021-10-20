@@ -63,4 +63,16 @@ public class userServ {
 		h.put("Message", "User deleted successfully");
 		return ResponseEntity.ok(h);
 	}
+
+	public user getUser(String id) {
+		return ur.findById(id).orElse(null);
+	}
+	
+	public List<String> getFriends(String id) {
+		return ur.findById(id).orElse(null).getFriends();
+	}
+	
+	// public List<user> getSearchedList(String username) {
+	// 	return ur.findByusernameIgnoreCaseContaining(username);
+	// }
 }
