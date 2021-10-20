@@ -11,7 +11,7 @@ export const Notification=(props)=> {
             message: `${props.message}`,
             type: `${props.type}`,
             insert: "top",
-            container: "top-right",
+            container: "top-center",
             animationIn: ["animate__animated", "animate__bounce"],
             animationOut: ["animate__animated", "animate__bounce"],
             dismiss: {
