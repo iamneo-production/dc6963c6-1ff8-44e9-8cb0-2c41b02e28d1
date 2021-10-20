@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.ant-card-cover img{
+  height: 300px !important;
+  object-fit: cover;
+}
+.ant-drawer-content-wrapper{
+  width:50% !important;
+}

@@ -4,7 +4,9 @@ import CreatePost from '../Components/CreatePost';
 import Posts from '../Components/Posts';
 
 class Home extends Component {
+    
     render() {
+        
         return (
             <div className="container mt-4 pb-4">
                 <div>

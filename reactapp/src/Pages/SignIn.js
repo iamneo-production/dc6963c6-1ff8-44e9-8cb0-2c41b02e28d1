@@ -54,11 +54,14 @@ class SignIn extends Component {
                     cookies.set('id', res.data.id, { path: '/' });
                     cookies.set('username', res.data.username, { path: '/' });
                     cookies.set('email', res.data.email, { path: '/' });
+                    cookies.set('role', res.data.role, { path: '/' });
                     Notification({
                     title:'Successfull',
                     message:res.data.Message,
                     type:'success'
                 })
+                 if(res.data.role==="ROLE_USER") window.location="/home"
+                 else window.location="/admin"
                 }
                else{
                 Notification({
