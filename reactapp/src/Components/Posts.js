@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { Card, Avatar } from 'antd';
-import { CommentOutlined, EyeOutlined, HeartOutlined } from '@ant-design/icons';
-import '../css/index.css';
-import 'antd/dist/antd.css';
 import ViewImage from './ViewImage';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-const { Meta } = Card;
+import ImageComponent from './getImage';
+
 
 
 class Posts extends Component{
@@ -62,29 +59,7 @@ class Posts extends Component{
           <div className="row mx-0">
             {
               this.state.posts.map(card=>
-                <div className="col-4">
-              <Card
-            className="shadow"
-            style={{ width: "100%" }}
-            cover={
-              <img
-                className="cardImg"
-                alt="example"
-                src={card.img}
-              />
-            }
-            actions={[
-              <HeartOutlined  className="fs-4"/>,
-              <CommentOutlined onClick={()=>this.showDrawer(card)} className="fs-4"/>,
-              <EyeOutlined onClick={()=>this.showDrawer(card)} className="fs-4"/>,
-            ]}
-          >
-            <Meta
-              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-              title={card.name}
-            />
-          </Card>
-              </div>
+                <ImageComponent id={card.imageId} card={card} showDrawer={this.showDrawer}/>
                 )
             }
               
