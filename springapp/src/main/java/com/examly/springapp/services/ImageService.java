@@ -46,6 +46,12 @@ public class ImageService {
 		return imageRepository.save(image);
 	}
 
+	public List<Image> getImage(String id,boolean possible) {
+
+		
+		return imageRepository.getByUserId(id);
+	}
+
 // 	public List<Image> saveImage(List<Image> image) {
 // 		return imageRepository.saveAll(image);
 // 	}
@@ -103,9 +109,19 @@ public class ImageService {
 // 		return imageRepository.save(existingImage);
 
 // 	}
+public void deleteById(String id){
 
+	Image i=imageRepository.findById(id).orElse(null);
+	imageRepository.delete(i);
+
+}
 public Image saveImage(Image i) {
-		
+		System.out.println("image"+i.getLikes().size());
     return imageRepository.save(i);
+}
+public void deleteImage(Image i) {
+	
+	System.out.println("deleted");
+	imageRepository.delete(i);
 }
 }

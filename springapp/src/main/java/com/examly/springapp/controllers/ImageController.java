@@ -95,9 +95,26 @@ public class ImageController {
 		}
 		return  false;
 	}
+
+	@RequestMapping(method=RequestMethod.GET,value="/getUser")
+	public  userDetails getUserDetails(@RequestHeader("userId") String user){
+		
+		userDetails details=new userDetails();
+		user User=userService.getUser(user);
+		details.setEmail(User.getEmail());
+		details.setUserName(User.getUsername());
+		details.setPhonenumber(User.getMobileNumber());
+		details.setFriendsList(userService.getFriends(user));
+		List<Image> image=imageService.getImage(user, true);
+		List<String> images=new ArrayList<>();
+		image.stream().forEach(i-> {images.add(i.getImageId());});	
+		details.setImages(images);
+		return details;
+	}
 	// @RequestMapping(method=RequestMethod.POST,value="/deleteLikes")
 	// public boolean deleteLikes(@RequestParam("likeId") String  likeId) {
-	// 	likesService.deleteLike(likeId);
+	// 	// imageService.deleteById(likeId);
+	// 	// likesService.deleteLike(likeId);
 	// 	return  true;
 	// }
 	// @RequestMapping(method=RequestMethod.POST,value="/deleteComment")

@@ -11,8 +11,8 @@ import com.examly.springapp.models.*;
 @Repository
 public interface ImageRepository extends JpaRepository<Image,String> {
 
-	//    @Query("SELECT i FROM Image i WHERE user_id =?1")
-	//    List<Image> getByUserId(String Id);
+	   @Query("SELECT i FROM Image i WHERE user_id =?1")
+	   List<Image> getByUserId(String Id);
 
 }
 

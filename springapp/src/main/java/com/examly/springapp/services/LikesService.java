@@ -43,13 +43,17 @@ public class LikesService {
 
     public void deleteLike(String likeId){
 
-        // likesRepository.get
-        //  Likes likes=likesRepository.getById(likeId);
-        //  Image image=likes.getImageId();
-        //  List<Likes> list=image.getLikes();
-        //   list.removeIf(like-> like.getLikeId().equals(likeId));
-        //   image.setLikes(list);
-		//   imageService.saveImage(image);
+         Likes likes=likesRepository.findById(likeId).orElse(null);;
+         Image image=likes.getImageId();
+         List<Likes> list=image.getLikes();
+          list.removeIf(like-> like.getLikeId().equals(likeId));
+          System.out.println("images"+list.size());
+          image.setLikes(list);
+		  imageService.deleteImage(image);
+		//   likesRepository.deleteById(likeId);
+		  imageService.saveImage(image);
+
+        
 		
     }
 

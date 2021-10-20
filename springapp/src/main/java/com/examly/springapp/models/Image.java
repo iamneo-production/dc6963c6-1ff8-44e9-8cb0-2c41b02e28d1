@@ -6,7 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity(name = "Image")
 public class Image {
 
@@ -25,7 +26,7 @@ public class Image {
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String imageId;
-	@OneToMany(mappedBy = "imageId")
+	@OneToMany(mappedBy = "imageId", cascade = CascadeType.ALL)
 	private List<Likes> likes;
 	@Column(name = "image_name")
 	private String imageName;
