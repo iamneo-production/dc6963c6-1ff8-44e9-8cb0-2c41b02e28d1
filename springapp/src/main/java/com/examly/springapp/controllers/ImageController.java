@@ -98,7 +98,6 @@ public class ImageController {
 
 	@RequestMapping(method=RequestMethod.GET,value="/getUser")
 	public  userDetails getUserDetails(@RequestHeader("userId") String user){
-		
 		userDetails details=new userDetails();
 		user User=userService.getUser(user);
 		details.setEmail(User.getEmail());

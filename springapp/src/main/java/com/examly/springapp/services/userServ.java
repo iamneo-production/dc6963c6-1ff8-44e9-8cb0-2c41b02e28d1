@@ -71,6 +71,17 @@ public class userServ {
 	public List<String> getFriends(String id) {
 		return ur.findById(id).orElse(null).getFriends();
 	}
+
+	public user addFriend(String friendId,String userId){
+		user us=ur.findById(userId).orElse(null);
+		List<String> friends=us.getFriends();
+		friends.add(friendId);
+		us.setFriends(friends);
+		return ur.save(us);
+
+
+
+	}
 	
 	// public List<user> getSearchedList(String username) {
 	// 	return ur.findByusernameIgnoreCaseContaining(username);

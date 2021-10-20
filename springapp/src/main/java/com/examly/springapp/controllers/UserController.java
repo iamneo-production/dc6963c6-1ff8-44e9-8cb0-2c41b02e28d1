@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import com.examly.springapp.models.user;
 import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.userServ;
@@ -49,5 +49,21 @@ public class UserController {
 	ResponseEntity<?> userDelete(@PathVariable String id) {
 		//userEditSave(us.userEdit(id));
 		return us.userDelete(id);
+	}
+	@RequestMapping(method=RequestMethod.POST, value="/addFriend")
+	user userDelete(@RequestParam("friendId") String  friendId,@RequestParam("userId") String  userId ) {
+		//userEditSave(us.userEdit(id));
+		return us.addFriend(friendId,userId);
+	}
+	@RequestMapping(value="/getUsersList", method = RequestMethod.GET)
+	public List<userSearchList> getUserList(){
+		List<user> list=us.getUser();
+		List<userSearchList> searchList=new ArrayList<>();
+		list.stream().forEach(i-> {userSearchList usr=new userSearchList();
+		usr.setUserId(i.getId());
+		usr.setUserName(i.getUsername());
+		searchList.add(usr);
+		});
+		return searchList;
 	}
 }
