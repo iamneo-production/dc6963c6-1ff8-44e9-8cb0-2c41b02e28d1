@@ -42,7 +42,7 @@ public class LikesService {
 	}
 
     public void deleteLike(String likeId){
-
+likesRepository.deleteById(likeId);
         // likesRepository.get
         //  Likes likes=likesRepository.getById(likeId);
         //  Image image=likes.getImageId();
