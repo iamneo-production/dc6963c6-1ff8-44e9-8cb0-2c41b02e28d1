@@ -23,16 +23,16 @@ public class user {
 	private boolean active=true;
 	@Column(name="role")
 	private String role="ROLE_USER";
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "userId",cascade = CascadeType.PERSIST)
 	private List<Comment> comment;
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "userId",cascade = CascadeType.PERSIST)
 	private List<Image> image;
 	@ElementCollection
 	@CollectionTable(name = "Friends", joinColumns = @JoinColumn(name = "id"))
 	@Column(name = "friends")
 	private List<String> friends;
 
-	@OneToMany(mappedBy = "userId")
+	@OneToMany(mappedBy = "userId",cascade = CascadeType.PERSIST)
 	private List<Likes> likes;
 	
 	
