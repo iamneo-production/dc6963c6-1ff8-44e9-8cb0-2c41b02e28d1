@@ -6,6 +6,7 @@ com/examly/springapp/models/userDetails.class
 com/examly/springapp/controllers/UserController.class
 com/examly/springapp/services/ImageService.class
 com/examly/springapp/models/JwtUtil.class
+com/examly/springapp/models/userSearchList.class
 com/examly/springapp/models/user.class
 com/examly/springapp/models/Image.class
 com/examly/springapp/repositories/LikesRepository.class

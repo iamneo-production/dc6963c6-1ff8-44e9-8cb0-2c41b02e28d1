@@ -21,6 +21,7 @@
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/controllers/ImageController.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/SpringappApplication.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/SecurityConfiguration.java
+/home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/models/userSearchList.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/repositories/loginRepo.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/models/JwtUtil.java
 /home/coder/project/workspace/springapp/src/main/java/com/examly/springapp/JwtRequestFilter.java

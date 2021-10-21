@@ -26,7 +26,8 @@ public class Image {
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String imageId;
-	@OneToMany(mappedBy = "imageId", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "imageId", cascade = CascadeType.PERSIST)
+	// @Cascade(CascadeType.DELETE)
 	private List<Likes> likes;
 	@Column(name = "image_name")
 	private String imageName;
@@ -35,7 +36,7 @@ public class Image {
 	@Column(name = "image")
 	@Lob
 	private Byte[] image;
-	@OneToMany(mappedBy = "imageId")
+	@OneToMany(mappedBy = "imageId", cascade = CascadeType.PERSIST)
 	private List<Comment> comments;
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -43,9 +44,6 @@ public class Image {
 	private user userId;
 	
 	private String user;
-	
-
-
 
 	public String getUser() {
 		return user;
@@ -116,16 +114,11 @@ public class Image {
 	public void setUserId(user userId) {
 		this.userId = userId;
 	}
-
 	public List<Likes> getLikes() {
 		return likes;
 	}
-
 	public void setLikes(List<Likes> likes) {
 		this.likes = likes;
 	}
-
-
-
 }
 

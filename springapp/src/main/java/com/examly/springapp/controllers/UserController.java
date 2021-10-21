@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.examly.springapp.models.user;
+import com.examly.springapp.models.*;
 import com.examly.springapp.repositories.userRepo;
 import com.examly.springapp.services.userServ;
 

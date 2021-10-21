@@ -110,12 +110,12 @@ public class ImageController {
 		details.setImages(images);
 		return details;
 	}
-	// @RequestMapping(method=RequestMethod.POST,value="/deleteLikes")
-	// public boolean deleteLikes(@RequestParam("likeId") String  likeId) {
-	// 	// imageService.deleteById(likeId);
-	// 	// likesService.deleteLike(likeId);
-	// 	return  true;
-	// }
+	@RequestMapping(method=RequestMethod.POST,value="/deleteLikes")
+	public boolean deleteLikes(@RequestParam("likeId") String  likeId) {
+		// imageService.deleteById(likeId);
+		likesService.deleteLike(likeId);
+		return  true;
+	}
 	// @RequestMapping(method=RequestMethod.POST,value="/deleteComment")
 	// public boolean addComment(@RequestParam("commentId") String  commentId ) {
 		
