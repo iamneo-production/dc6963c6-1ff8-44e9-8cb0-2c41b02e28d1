@@ -23,11 +23,11 @@ public class Likes {
 	@GenericGenerator(name="system-uuid", strategy = "uuid")   
 	private String likeId;
 	@JsonIgnore
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="user_id",referencedColumnName="id")
 	private user userId;
 	@JsonIgnore
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="image_id",referencedColumnName="image_id")
 	private Image imageId;
 	
