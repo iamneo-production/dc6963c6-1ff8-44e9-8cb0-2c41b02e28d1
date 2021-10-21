@@ -96,11 +96,11 @@ public class ImageController {
 		}
 		return  false;
 	}
-	// @RequestMapping(method=RequestMethod.POST,value="/deleteLikes")
-	// public boolean deleteLikes(@RequestParam("likeId") String  likeId) {
-	// 	likesService.deleteLike(likeId);
-	// 	return  true;
-	// }
+	@RequestMapping(method=RequestMethod.POST,value="/deleteLikes")
+	public boolean deleteLikes(@RequestParam("likeId") String  likeId) {
+		likesService.deleteLike(likeId);
+		return  true;
+	}
 	// @RequestMapping(method=RequestMethod.POST,value="/deleteComment")
 	// public boolean addComment(@RequestParam("commentId") String  commentId ) {
 		
