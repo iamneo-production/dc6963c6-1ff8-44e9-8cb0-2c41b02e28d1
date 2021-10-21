@@ -25,7 +25,7 @@ public class Image {
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String imageId;
-	@OneToMany(mappedBy = "imageId")
+	@OneToMany(mappedBy = "imageId" , cascade = CascadeType.PERSIST)
 	private List<Likes> likes;
 	@Column(name = "image_name")
 	private String imageName;
@@ -34,10 +34,10 @@ public class Image {
 	@Column(name = "image")
 	@Lob
 	private Byte[] image;
-	@OneToMany(mappedBy = "imageId")
+	@OneToMany(mappedBy = "imageId", cascade = CascadeType.PERSIST)
 	private List<Comment> comments;
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private user userId;
 	
